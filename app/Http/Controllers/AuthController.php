@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Exception;
+use Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -67,8 +72,39 @@ class AuthController extends Controller
         return response()->json($user, 201);
     }
 
-    public function login()
+    public function login(LoginRequest $request)
     {
-        
+        $validated = $request->validated();
+        // $credentials = $request->only('email', 'password');
+        if (! $token = JWTAuth::attempt($validated)) {
+            return response()->json(['message' => 'Invalid credentials.'], 401);
+        }
+
+        $user = Auth::user();
+        $token = JWTAuth::fromUser($user);
+        // if (Auth::attempt($validated)) {
+        //     $user = User::where('email', $validated['email'])->first();
+
+        //     if (!$user || !Hash::check($validated['password'], $user->password)) {
+        //         return response()->json(['message' => 'Invalid credentials.'], 401);
+        //     }
+
+        //     $token = $user->createToken($user->first_name.'-AuthToken')->plainTextToken;
+
+
+        //     // $token = $user->createToken(Str::random(10))->plainTextToken;
+
+        //     return response()->json([
+        //         'message' => 'Login Successful',
+        //         'token' => $token
+        //     ], 200);
+
+
+        // }
+
+        return response()->json([
+            'message' => 'Login Successful',
+            'token' => $token
+        ], 200);
     }
 }
