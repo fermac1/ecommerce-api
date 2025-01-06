@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/all-categories', [CategoryController::class, 'getCategories']);
+
+Route::middleware(['auth.jwt'])->group(function () {
+    Route::post('/category/create', [CategoryController::class, 'createCatogory']);
+    Route::post('/category/update/{id}', [CategoryController::class, 'updateCatogory']);
+});
