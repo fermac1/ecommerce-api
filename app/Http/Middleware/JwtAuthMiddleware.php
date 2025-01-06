@@ -20,13 +20,13 @@ class JwtAuthMiddleware
     {
         try {
             $token = $request->cookie('jwt');
-            Log::info('JWT Token from cookie:', ['token' => $token]);
+            // Log::info('JWT Token from cookie:', ['token' => $token]);
 
             if (!$token) {
-                Log::info('error: Token not provided');
+                // Log::info('error: Token not provided');
                 return response()->json(['error' => 'Token not provided'], 401);
             }
-            
+
             JWTAuth::setToken($token)->authenticate();
 
         } catch (JWTException $e) {
