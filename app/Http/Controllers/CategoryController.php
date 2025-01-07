@@ -18,7 +18,7 @@ class CategoryController extends Controller
 
     }
 
-    public function createCatogory(Request $request)
+    public function createCategory(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required',
@@ -41,7 +41,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function updateCatogory(Request $request, $id)
+    public function updateCategory(Request $request, $id)
     {
         $category = Category::findOrFail($id);
 
@@ -62,7 +62,7 @@ class CategoryController extends Controller
         ], 200);
     }
 
-    public function deleteCatogory()
+    public function deleteCategory()
     {
 
     }

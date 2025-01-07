@@ -26,8 +26,12 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/all-categories', [CategoryController::class, 'getCategories']);
 Route::get('/products/all', [ProductController::class, 'getProducts']);
+Route::get('/products/single/{id}', [ProductController::class, 'singleProduct']);
 
 Route::middleware(['auth.jwt'])->group(function () {
-    Route::post('/category/create', [CategoryController::class, 'createCatogory']);
-    Route::post('/category/update/{id}', [CategoryController::class, 'updateCatogory']);
+    Route::post('/category/create', [CategoryController::class, 'createCategory']);
+    Route::post('/category/update/{id}', [CategoryController::class, 'updateCategory']);
+    Route::post('/product/create', [ProductController::class, 'createProduct']);
+    Route::post('/product/update/{id}', [ProductController::class, 'updateProduct']);
+
 });
