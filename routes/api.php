@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/all-categories', [CategoryController::class, 'getCategories']);
 Route::get('/products/all', [ProductController::class, 'getProducts']);
 Route::get('/products/single/{id}', [ProductController::class, 'singleProduct']);
+
+Route::get('/orders', [OrderController::class, 'index']);
 
 Route::middleware(['auth.jwt'])->group(function () {
     Route::post('/category/create', [CategoryController::class, 'createCategory']);
