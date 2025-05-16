@@ -110,9 +110,5 @@ class AuthController extends Controller
             'token' => $token
         ], 200)->withCookie($cookie);
 
-        // return response()->json([
-        //     'message' => 'Login Successful',
-        //     'token' => $token
-        // ], 200);
     }
 }
