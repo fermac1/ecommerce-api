@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
             // 'phone_number' => ['nullable', 'regex:/^(\+234|0)[789][0-9]{8}$/'],
             // 'phone_number' => ['nullable', 'regex:/^(\+234|0)(7|8|9){1}(0|1){1}[0-9]{8}$/'],
             'phone_number' => ['nullable', 'regex:/^(\+234|0)[7-9][0-9]{9}$/'],
-            'shipping_address' => 'nullable|text',
+            'shipping_address' => 'nullable|string|max:500',
         ];
     }
 
